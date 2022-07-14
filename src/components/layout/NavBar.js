@@ -3,15 +3,23 @@ import { Link, NavLink } from "react-router-dom";
 const NavBar = () => {
   return (
     <nav>
-      <ul>
-        <li>
-          <Link to="/home">Home</Link>
+      <ul className="nav">
+        <li className="nav-item">
+          <Link className="nav-link" to="/home">
+            Home
+          </Link>
         </li>
-        <li>
-          <NavLink to="/about">About</NavLink>
+
+        <li className="nav-item">
+          <NavLink className="nav-link" to="/about">
+            About
+          </NavLink>
         </li>
-        <li>
-          <NavLink to="/">Landing</NavLink>
+
+        <li className="nav-item">
+          <NavLink className="nav-link" to="/">
+            Landing
+          </NavLink>
         </li>
       </ul>
     </nav>
