@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 
-const RegisterForm = () => {
+const RegisterForm = (props) => {
   const history = useHistory();
 
   const [formData, setFormData] = useState({
@@ -32,48 +32,68 @@ const RegisterForm = () => {
 
     axios.post("http://localhost:5000/users", formData).then((res) => {
       console.log(res.data);
-      localStorage.setItem("userToken", res.data.token);
-      history.push("/home");
+
+      if (res.data.token && res.data.user) {
+        localStorage.setItem("userToken", res.data.token);
+        props.setUser(res.data.user);
+        history.push("/home");
+      } else {
+        console.error(res.data);
+      }
     });
   };
 
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="username">Username</label>
-        <input
-          type="text"
-          id="username"
-          name="username"
-          value={formData.username}
-          onChange={(e) =>
-            setFormData({ ...formData, [e.target.id]: e.target.value })
-          }
-        />
+        <div className="mb-3">
+          <label className="form-label" htmlFor="username">
+            Username
+          </label>
+          <input
+            className="form-control"
+            type="text"
+            id="username"
+            name="username"
+            value={formData.username}
+            onChange={(e) =>
+              setFormData({ ...formData, [e.target.id]: e.target.value })
+            }
+          />
+        </div>
+        <div className="mb-3">
+          <label className="form-label" htmlFor="email">
+            Email
+          </label>
+          <input
+            className="form-control"
+            type="text"
+            id="email"
+            name="email"
+            value={formData.email}
+            onChange={(e) =>
+              setFormData({ ...formData, [e.target.id]: e.target.value })
+            }
+          />
+        </div>
 
-        <label htmlFor="email">Email</label>
-        <input
-          type="text"
-          id="email"
-          name="email"
-          value={formData.email}
-          onChange={(e) =>
-            setFormData({ ...formData, [e.target.id]: e.target.value })
-          }
-        />
+        <div className="mb-3">
+          <label className="form-label" htmlFor="password">
+            Password
+          </label>
+          <input
+            className="form-control"
+            type="password"
+            id="password"
+            name="password"
+            value={formData.password}
+            onChange={(e) =>
+              setFormData({ ...formData, [e.target.id]: e.target.value })
+            }
+          />
+        </div>
 
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          value={formData.password}
-          onChange={(e) =>
-            setFormData({ ...formData, [e.target.id]: e.target.value })
-          }
-        />
-
-        <input type="submit" />
+        <input className="btn btn-primary" type="submit" />
       </form>
     </div>
   );

@@ -1,6 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
 
-const NavBar = () => {
+const NavBar = (props) => {
   return (
     <nav>
       <ul className="nav">
@@ -21,6 +21,7 @@ const NavBar = () => {
             Landing
           </NavLink>
         </li>
+        {props.user && <span>{props.user.username}</span>}
       </ul>
     </nav>
   );

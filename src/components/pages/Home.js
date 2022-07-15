@@ -1,9 +1,9 @@
 import NavBar from "../layout/NavBar";
 
-const Home = () => {
+const Home = (props) => {
   return (
     <div>
-      <NavBar />
+      <NavBar user={props.user} />
       <h1>Home Page</h1>
     </div>
   );
