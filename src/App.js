@@ -10,7 +10,8 @@ function App() {
 
   return (
     <div className="container">
-      <h1>To Dos Frontend</h1>
+      <h1>Todos Frontend</h1>
+
       <Switch>
         <Route
           exact
@@ -19,7 +20,10 @@ function App() {
             <Landing {...routerProps} setUser={setUser} />
           )}
         />
-        <Route path="/home" render={(...routerProps) => <Home user={user} />} />
+        <Route
+          path="/home"
+          render={(routerProps) => <Home {...routerProps} user={user} />}
+        />
         <Route path="/about" component={About} />
       </Switch>
     </div>
