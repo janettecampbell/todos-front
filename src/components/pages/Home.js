@@ -2,9 +2,11 @@ import NavBar from "../layout/NavBar";
 import CreateTodo from "../forms/CreateTodo";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 const Home = (props) => {
   const [todos, setTodos] = useState(null);
+  const history = useHistory();
 
   useEffect(() => {
     axios
@@ -31,6 +33,10 @@ const Home = (props) => {
       .catch((err) => console.error(err));
   };
 
+  const handleUpdate = (todo) => {
+    history.push(`/update/${todo._id}`);
+  };
+
   return (
     <div>
       <NavBar user={props.user} />
@@ -47,11 +53,20 @@ const Home = (props) => {
               {todo.user === props.user._id && (
                 <span
                   className="btn btn-danger"
+                  style={{ marginRight: "5px" }}
                   onClick={() => handleDelete(todo)}
                 >
-                  x
+                  X
                 </span>
               )}{" "}
+              {todo.user === props.user._id && (
+                <span
+                  className="btn btn-info"
+                  onClick={() => handleUpdate(todo)}
+                >
+                  Update
+                </span>
+              )}
             </h6>
           </div>
         ))}

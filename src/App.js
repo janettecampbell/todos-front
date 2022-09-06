@@ -4,6 +4,7 @@ import { useState } from "react";
 import Landing from "./components/pages/Landing";
 import Home from "./components/pages/Home";
 import About from "./components/pages/About";
+import UpdateTodo from "./components/forms/UpdateTodo";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -25,6 +26,10 @@ function App() {
           render={(routerProps) => <Home {...routerProps} user={user} />}
         />
         <Route path="/about" component={About} />
+        <Route
+          path="/update/:id"
+          render={(routerProps) => <UpdateTodo {...routerProps} />}
+        />
       </Switch>
     </div>
   );
